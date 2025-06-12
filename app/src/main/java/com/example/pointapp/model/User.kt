@@ -10,5 +10,6 @@ data class User(
     val birthMonth: Int = 0,
     val birthYear: Int = 0,
     val city: String = "",
-    val gender: String = ""
+    val gender: String = "",
+    val role: String = ""
 )

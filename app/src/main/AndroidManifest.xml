@@ -15,19 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PointApp">
         <activity
+            android:name=".activities.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.EmailVerificationActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".fragments.HomeFragment"
-            android:exported="false" />
-        <activity
             android:name=".activities.CompleteProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.SignupActivity"
             android:exported="false" />
         <activity
             android:name=".activities.OtpActivity"

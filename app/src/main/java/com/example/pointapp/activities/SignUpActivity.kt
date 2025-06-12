@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,9 +12,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.pointapp.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +28,7 @@ class SignUpActivity : AppCompatActivity() {
         val edtPassword = findViewById<EditText>(R.id.edtPassword)
         val edtConfirmPassword = findViewById<EditText>(R.id.edtConfirmPassword)
         val btnSignUp = findViewById<Button>(R.id.btnSignUp)
+        val tvGoToLogin = findViewById<TextView>(R.id.tvGoToLogin)
 
         btnSignUp.setOnClickListener {
             val email = edtEmail.text.toString().trim()
@@ -47,22 +51,54 @@ class SignUpActivity : AppCompatActivity() {
                         val user = auth.currentUser
                         user?.sendEmailVerification()?.addOnCompleteListener { verifyTask ->
                             if (verifyTask.isSuccessful) {
-                                Toast.makeText(this, "Đăng ký thành công! Vui lòng kiểm tra email để xác thực.", Toast.LENGTH_LONG).show()
-                                // Chờ xác thực email rồi mới cho phép chuyển tiếp
-                                // Option 1: Mở màn hình thông báo yêu cầu xác thực email và check trạng thái
-                                val intent = Intent(this, EmailVerificationActivity::class.java)
-                                intent.putExtra("email", email)
-                                intent.putExtra("uid", user.uid)
-                                startActivity(intent)
-                                finish()
+                                // Sau khi gửi email xác thực, lưu thông tin user với role vào Firestore
+                                val uid = user.uid
+                                val userMap = hashMapOf(
+                                    "email" to email,
+                                    "role" to "user" // hoặc "admin" nếu bạn muốn tạo tài khoản admin
+                                )
+                                db.collection("users").document(uid)
+                                    .set(userMap)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            this,
+                                            "Đăng ký thành công! Vui lòng kiểm tra email để xác thực.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        // Chờ xác thực email rồi mới cho phép chuyển tiếp
+                                        val intent = Intent(this, EmailVerificationActivity::class.java)
+                                        intent.putExtra("email", email)
+                                        intent.putExtra("uid", user.uid)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(
+                                            this,
+                                            "Đăng ký thành công nhưng lưu thông tin thất bại: ${e.message}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                             } else {
-                                Toast.makeText(this, "Lỗi gửi email xác thực: ${verifyTask.exception?.message}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    "Lỗi gửi email xác thực: ${verifyTask.exception?.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     } else {
-                        Toast.makeText(this, "Đăng ký thất bại: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Đăng ký thất bại: ${task.exception?.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
+        }
+
+        tvGoToLogin.setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 

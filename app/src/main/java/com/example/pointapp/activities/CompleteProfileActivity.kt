@@ -1,7 +1,6 @@
 package com.example.pointapp.activities
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -53,7 +52,7 @@ class CompleteProfileActivity : AppCompatActivity() {
         edtEmail.isEnabled = false
 
         // Thiết lập Spinner giới tính
-        val genderOptions = arrayOf("Male", "Female")
+        val genderOptions = arrayOf("Nam", "Nữ", "Khác")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spGender.adapter = adapter

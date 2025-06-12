@@ -55,41 +55,63 @@
             android:id="@+id/edtAccount"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@drawable/bg_edittext"
             android:inputType="textEmailAddress"
             android:hint="Email hoặc số điện thoại"
             android:layout_marginBottom="16dp"/>
+
         <EditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
+            android:background="@drawable/bg_edittext"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:layout_height="50dp"
+            android:layout_marginBottom="24dp"
             android:hint="Mật khẩu"
-            android:inputType="textPassword"
-            android:layout_marginBottom="24dp"/>
-        <Button
+            android:inputType="textPassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:backgroundTint="@color/main_color"
+            android:background="@drawable/bg_button_white"
+            android:backgroundTint="@color/galaxy"
+            android:textColor="@color/white"
             android:text="Đăng nhập"/>
 
-        <TextView
-            android:id="@+id/tvGoToSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chưa có tài khoản? Đăng ký"
-            android:textColor="#0066cc"
-            android:textSize="16sp"
-            android:layout_marginTop="12dp"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <Button
-            android:id="@+id/btnResendVerify"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Gửi lại email xác thực"
-            android:visibility="gone"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/tvGoToSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Chưa có tài khoản?\nĐăng ký"
+                android:textColor="#0066cc"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvGoToForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Quên mật khẩu"
+                android:textColor="#0066cc"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

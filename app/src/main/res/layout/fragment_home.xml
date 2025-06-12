@@ -66,34 +66,48 @@
             android:paddingEnd="24dp"
             android:layout_marginBottom="6dp">
 
-            <ImageView
+            <LinearLayout
                 android:id="@+id/imgProfile"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_profile"
-                android:contentDescription="Profile"/>
-
-            <TextView
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profile"
-                android:layout_marginStart="4dp"
-                android:textColor="@android:color/black"/>
+                android:layout_height="wrap_content">
 
-            <ImageView
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_profile"
+                    android:contentDescription="Profile"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@android:color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/imgInbox"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_inbox"
-                android:layout_marginStart="24dp"
-                android:contentDescription="Inbox"/>
-
-            <TextView
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Inbox"
-                android:layout_marginStart="4dp"
-                android:textColor="@android:color/black"/>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_inbox"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="Inbox"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Inbox"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@android:color/black"/>
+
+            </LinearLayout>
 
             <View
                 android:layout_width="0dp"
@@ -130,9 +144,9 @@
                 android:id="@+id/imgStar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_star_green"
                 android:layout_marginStart="4dp"
-                android:contentDescription="Star"/>
+                android:contentDescription="Star"
+                android:src="@drawable/ic_star" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -181,7 +195,9 @@
                     android:max="500"
                     android:progressDrawable="@drawable/bg_progress_bar"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>
 
                 <!-- Mũi tên marker -->
                 <ImageView
@@ -190,7 +206,8 @@
                     android:layout_height="40dp"
                     android:layout_gravity="top|start"
                     android:src="@drawable/ic_pointer"
-                    android:layout_marginTop="0dp"/>
+                    android:layout_marginTop="0dp"
+                    />
             </FrameLayout>
 
             <!-- Các mốc điểm phía dưới -->
