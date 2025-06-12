@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1040297486825",
+    "firebase_url": "https://pointapp-114d7-default-rtdb.firebaseio.com",
+    "project_id": "pointapp-114d7",
+    "storage_bucket": "pointapp-114d7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040297486825:android:05b5cf6c3c2cf4a0a40378",
+        "android_client_info": {
+          "package_name": "com.example.pointapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXxottvZaluMQCH9kh72lz-GEmGqQ8woA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
