@@ -1,153 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
     <LinearLayout
+        android:id="@+id/topPanel"
         android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <!-- Header -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+        <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="12dp">
+            android:text="@string/membership"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#222"
+            android:padding="20dp"/>
 
-            <ImageView
-                android:id="@+id/btnClose"
-                android:src="@drawable/ic_close"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="Close" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/kh_coffee_rewards"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#222"
-                android:paddingStart="12dp" />
-        </LinearLayout>
-
-        <!-- Reward Progress -->
-        <TextView
-            android:text="REWARD PROGRESS"
-            android:textSize="12sp"
-            android:textColor="#888"
-            android:layout_marginTop="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="6dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tvPoint"
-                android:text="632"
-                android:textSize="32sp"
-                android:textColor="#222"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:src="@drawable/ic_star"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="4dp"
-                android:contentDescription="Star Icon"/>
-        </LinearLayout>
-
-        <TextView
-            android:text="Star Points"
-            android:textSize="12sp"
-            android:textColor="#AAA"
-            android:layout_marginTop="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <!-- Progress Bar Custom -->
-        <RelativeLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="12dp"
-            android:paddingTop="8dp"
+            android:layout_height="10dp"
+            android:background="@drawable/shadow_bottom"/>
+
+        <!-- Card + Barcode Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:paddingBottom="8dp">
 
-            <!-- Custom progress line -->
-            <View
-                android:id="@+id/progressLine"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_centerVertical="true"
-                android:background="#C9A253"/>
+            <!-- Membership Card -->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="90dp"
+                android:layout_marginEnd="10dp"
+                android:clipToPadding="true"
+                android:clipChildren="true"
+                android:elevation="2dp">
 
-            <!-- Milestone 100 -->
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"/>
+                <!-- Badge corner -->
+                <ImageView
+                    android:id="@+id/imgCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/coffeecommunicate"
+                    android:scaleType="centerCrop" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/imgBadge"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/logoround"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="6dp"
+                    android:contentDescription="Badge" />
+
+            </RelativeLayout>
+
+            <!-- QR code + mã -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/progressLine"
-                android:text="100"
-                android:textSize="12sp"
-                android:textColor="#555"
-                android:layout_marginTop="8dp"/>
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_gravity="center_vertical">
 
-            <!-- Milestone 250 -->
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="0dp"
-                android:layout_toRightOf="@id/progressLine"
-                android:layout_alignParentStart="false"/>
+                <ImageView
+                    android:id="@+id/imgQRCode"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:contentDescription="QRCode"
+                    android:layout_gravity="center_horizontal" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_toRightOf="@id/progressLine"
-                android:layout_below="@id/progressLine"
-                android:text="250"
-                android:textSize="12sp"
-                android:textColor="#555"
-                android:layout_marginTop="8dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#666"/>
 
-            <!-- Milestone 500 -->
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/progressLine"
-                android:text="500"
-                android:textSize="12sp"
-                android:textColor="#555"
-                android:layout_marginTop="8dp"/>
-        </RelativeLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
 
-        <!-- View History Button -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center_horizontal"
+                        android:text="KCR - "
+                        android:textColor="#555"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Customer Phone Number"
+                        android:textColor="#555"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvRewards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="2dp"
+            android:text="REWARDS"
+            android:textColor="#555"
+            android:textSize="12sp"/>
     </LinearLayout>
-</ScrollView>
+</RelativeLayout>

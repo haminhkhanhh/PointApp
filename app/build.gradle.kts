@@ -61,6 +61,7 @@ dependencies {
 
     implementation(libs.firebase.database)
     implementation(libs.firebase.auth)
+    implementation(libs.zxing)
 
 
     testImplementation(libs.junit)

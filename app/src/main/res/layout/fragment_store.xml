@@ -1,13 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.StoreFragment">
+    android:background="@android:color/white">
 
-    <TextView
+    <!-- Header -->
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="54dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="12dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cửa hàng"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#222"/>
+
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:contentDescription="Search"/>
+    </LinearLayout>
+
+    <!-- Google MapView -->
+    <FrameLayout
+        android:id="@+id/mapContainer"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="6dp">
+        <!-- Bạn sẽ add fragment MapView vào đây bằng code -->
+    </FrameLayout>
+
+    <!-- Nearby title -->
+    <TextView
+        android:id="@+id/tvNearby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NEARBY"
+        android:textSize="12sp"
+        android:textColor="#888"
+        android:layout_below="@id/mapContainer"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="18dp"
+        android:textStyle="bold" />
+
+    <!-- Danh sách cửa hàng gần đây -->
+    <LinearLayout
+        android:id="@+id/nearbyList"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNearby"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@android:color/white">
+
+        <!-- Item mẫu, lặp bằng code Kotlin -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="117 Bàu Cát"
+                    android:textSize="15sp"
+                    android:textColor="#222"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3 km away from you"
+                    android:textSize="13sp"
+                    android:textColor="#666"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="info"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
