@@ -62,7 +62,10 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.auth)
     implementation(libs.play.services.maps)
+    implementation(libs.gms.play.services.maps.v1820)
+    implementation(libs.play.services.location)
     implementation(libs.zxing)
+    implementation(libs.core)
 
 
     testImplementation(libs.junit)

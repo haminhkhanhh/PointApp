@@ -7,7 +7,10 @@
     <string name="badge">Badge</string>
     <string name="customer">Customer</string>
     <string name="qrcode">QRCode</string>
-    <string name="kcr">KCR -</string>
+    <string name="kcr">KCR - </string>
     <string name="customer_phone_number">Customer Phone Number</string>
     <string name="rewards">REWARDS</string>
+    <string name="search">Search</string>
+    <string name="nearby">NEARBY</string>
+    <string name="cua_hang">Cửa hàng</string>
 </resources>

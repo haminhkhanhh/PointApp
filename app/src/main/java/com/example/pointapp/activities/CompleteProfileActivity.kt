@@ -46,6 +46,7 @@ class CompleteProfileActivity : AppCompatActivity() {
         val btnSendOtp = findViewById<Button>(R.id.btnSendOtp)
         val edtOtp = findViewById<EditText>(R.id.edtOtp)
         val btnUpdate = findViewById<Button>(R.id.btnUpdate)
+        val role = "user"
 
         // Hiển thị email không cho sửa
         edtEmail.setText(auth.currentUser?.email ?: "")
@@ -97,6 +98,7 @@ class CompleteProfileActivity : AppCompatActivity() {
             val year = edtYear.text.toString().toIntOrNull() ?: 0
             val otp = edtOtp.text.toString().trim()
             val verId = verificationId
+            val role = role
 
             val errorMsg = validateProfile(
                 firstName, lastName, email, phone, day, month, year, city, gender, otp, verId
@@ -110,7 +112,7 @@ class CompleteProfileActivity : AppCompatActivity() {
             // Liên kết hoặc cập nhật số điện thoại với Firebase Auth
             auth.currentUser?.linkWithCredential(credential)
                 ?.addOnSuccessListener {
-                    saveUser(firstName, lastName, email, phone, day, month, year, city, gender)
+                    saveUser(firstName, lastName, email, phone, day, month, year, city, gender, role)
                 }
                 ?.addOnFailureListener { e ->
                     if (e is FirebaseAuthUserCollisionException ||
@@ -118,7 +120,18 @@ class CompleteProfileActivity : AppCompatActivity() {
                     ) {
                         auth.currentUser?.updatePhoneNumber(credential)
                             ?.addOnSuccessListener {
-                                saveUser(firstName, lastName, email, phone, day, month, year, city, gender)
+                                saveUser(
+                                    firstName,
+                                    lastName,
+                                    email,
+                                    phone,
+                                    day,
+                                    month,
+                                    year,
+                                    city,
+                                    gender,
+                                    role
+                                )
                             }
                             ?.addOnFailureListener { err ->
                                 Toast.makeText(this, "Không thể cập nhật số điện thoại: ${err.localizedMessage}", Toast.LENGTH_LONG).show()
@@ -139,7 +152,8 @@ class CompleteProfileActivity : AppCompatActivity() {
         month: Int,
         year: Int,
         city: String,
-        gender: String
+        gender: String,
+        role: String
     ) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val user = User(
@@ -152,7 +166,8 @@ class CompleteProfileActivity : AppCompatActivity() {
             birthMonth = month,
             birthYear = year,
             city = city,
-            gender = gender
+            gender = gender,
+            role = "user"
         )
         userRepo.updateUser(
             user = user,

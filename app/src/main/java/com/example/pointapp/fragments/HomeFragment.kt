@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.pointapp.R
 import com.example.pointapp.activities.ProfileActivity
+import com.example.pointapp.model.Point
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var seekFeedback: SeekBar
     private lateinit var imgBanner: ImageView
+    private lateinit var imgPointer: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,18 +51,42 @@ class HomeFragment : Fragment() {
         progressBar = view.findViewById(R.id.progressBar)
         seekFeedback = view.findViewById(R.id.seekFeedback)
         imgBanner = view.findViewById(R.id.imgBanner)
+        imgPointer = view.findViewById(R.id.imgPointer)
 
         // Lấy dữ liệu user từ Firestore (ví dụ: họ tên, điểm)
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid != null) {
-            FirebaseFirestore.getInstance().collection("users").document(uid).get()
-                .addOnSuccessListener { doc ->
-                    val name = doc.getString("firstName") ?: ""
-                    val lastName = doc.getString("lastName") ?: ""
-                    tvCustomerName.text = "$name $lastName"
-                    val points = doc.getLong("points") ?: 0
-                    tvPoints.text = points.toString()
-                    progressBar.progress = points.toInt()
+            val db = FirebaseFirestore.getInstance()
+            // 1. Lấy thông tin tên từ users/{uid}
+            db.collection("users").document(uid)
+                .get()
+                .addOnSuccessListener { docUser ->
+                    val firstName = docUser.getString("firstName") ?: ""
+                    val lastName = docUser.getString("lastName") ?: ""
+                    tvCustomerName.text = "$firstName $lastName"
+
+                    // 2. Lấy point từ collection 'point' (root)
+                    db.collection("point").document(uid)
+                        .get()
+                        .addOnSuccessListener { docPoint ->
+                            val pointObj = docPoint.toObject(Point::class.java)
+                            val barWidth = progressBar.width
+                            val maxPoint = 500.0
+                            if (pointObj != null) {
+                                tvPoints.text = pointObj.point.toInt().toString()
+                                progressBar.progress = pointObj.point.toInt()
+                                progressBar.post {
+                                    val barWidth = progressBar.width.toDouble()
+                                    val percent = (pointObj.point / maxPoint).coerceIn(0.0, 1.0) + 0.05
+                                    val markerOffset = percent * barWidth - (imgPointer.width / 2)
+                                    imgPointer.translationX = markerOffset.toFloat()
+                                }
+                            }
+
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(context, "Không lấy được điểm: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
                 }
         }
 
