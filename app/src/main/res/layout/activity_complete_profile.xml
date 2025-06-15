@@ -108,11 +108,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSendOtp"
+                android:background="@drawable/bg_button_white"
                 android:text="Gửi OTP"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="40dp"/>
 
         </LinearLayout>
 
@@ -152,12 +153,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUpdate"
-            android:text="Update"
-            android:layout_width="wrap_content"
+            android:text="Cập nhật"
+            android:background="@drawable/bg_button_white"
+            android:backgroundTint="@color/galaxy"
+            android:textColor="@color/white"
+            android:layout_width="130dp"
             android:layout_gravity="end"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginTop="16dp"/>
 
     </LinearLayout>

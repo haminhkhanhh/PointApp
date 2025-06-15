@@ -146,6 +146,7 @@
             <TextView
                 android:id="@+id/tvPoints"
                 android:layout_width="105dp"
+                android:text="0"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
                 android:textSize="36sp"
