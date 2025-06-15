@@ -69,7 +69,6 @@ class HomeFragment : Fragment() {
             Toast.makeText(context, "Profile clicked!", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), ProfileActivity::class.java)
             startActivity(intent)
-            activity?.finish()
         }
         view.findViewById<LinearLayout>(R.id.imgInbox).setOnClickListener {
             Toast.makeText(context, "Inbox clicked!", Toast.LENGTH_SHORT).show()

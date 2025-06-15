@@ -42,19 +42,20 @@
     </FrameLayout>
 
     <!-- Nearby title -->
+
+    <!-- Danh sách cửa hàng gần đây -->
     <TextView
         android:id="@+id/tvNearby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/mapContainer"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
         android:text="NEARBY"
         android:textSize="12sp"
-        android:textColor="#888"
-        android:layout_below="@id/mapContainer"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="18dp"
         android:textStyle="bold" />
 
-    <!-- Danh sách cửa hàng gần đây -->
     <LinearLayout
         android:id="@+id/nearbyList"
         android:orientation="vertical"

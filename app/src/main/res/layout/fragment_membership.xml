@@ -51,7 +51,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/coffeecommunicate"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/customer"/>
 
                 <ImageView
                     android:id="@+id/imgBadge"
@@ -61,7 +62,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:layout_margin="6dp"
-                    android:contentDescription="Badge" />
+                    android:contentDescription="@string/badge" />
 
             </RelativeLayout>
 
@@ -78,7 +79,7 @@
                     android:id="@+id/imgQRCode"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:contentDescription="QRCode"
+                    android:contentDescription="@string/qrcode"
                     android:layout_gravity="center_horizontal" />
 
                 <View
@@ -94,19 +95,19 @@
                     >
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:gravity="center_horizontal"
-                        android:text="KCR - "
+                        android:text="@string/kcr"
                         android:textColor="#555"
                         android:textSize="13sp" />
                     <TextView
                         android:id="@+id/tvPhone"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Customer Phone Number"
+                        android:text="@string/customer_phone_number"
                         android:textColor="#555"
                         android:textSize="13sp" />
 
@@ -119,10 +120,9 @@
             android:id="@+id/tvRewards"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="12dp"
             android:layout_marginBottom="2dp"
-            android:text="REWARDS"
+            android:text="@string/rewards"
             android:textColor="#555"
             android:textSize="12sp"/>
     </LinearLayout>

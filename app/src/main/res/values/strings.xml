@@ -4,4 +4,10 @@
     <string name="details">Details</string>
     <string name="kh_coffee_rewards">KH Coffee Rewards</string>
     <string name="membership">Membership</string>
+    <string name="badge">Badge</string>
+    <string name="customer">Customer</string>
+    <string name="qrcode">QRCode</string>
+    <string name="kcr">KCR -</string>
+    <string name="customer_phone_number">Customer Phone Number</string>
+    <string name="rewards">REWARDS</string>
 </resources>
