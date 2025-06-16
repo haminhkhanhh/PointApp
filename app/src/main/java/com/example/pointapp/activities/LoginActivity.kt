@@ -46,8 +46,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser(username: String, password: String) {
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
+            if (!isFinishing && !isDestroyed)
+                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
             return
+        }
+
+        val showToast: (String) -> Unit = { msg ->
+            if (!isFinishing && !isDestroyed)
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
 
         if (android.util.Patterns.EMAIL_ADDRESS.matcher(username).matches()) {
@@ -55,11 +61,33 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(username, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Đăng nhập thành công
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
+                        val user = auth.currentUser
+                        val uid = user?.uid
+                        if (uid == null) {
+                            showToast("Không lấy được UID, đăng nhập thất bại!")
+                            return@addOnCompleteListener
+                        }
+                        db.collection("users").document(uid).get()
+                            .addOnSuccessListener { doc ->
+                                if (!isFinishing && !isDestroyed) {
+                                    if (doc != null && doc.exists()) {
+                                        val role = doc.getString("role") ?: "user"
+                                        if (role == "admin") {
+                                            startActivity(Intent(this, AdminMainActivity::class.java))
+                                        } else {
+                                            startActivity(Intent(this, MainActivity::class.java))
+                                        }
+                                        finish()
+                                    } else {
+                                        showToast("Không tìm thấy thông tin tài khoản trong hệ thống!")
+                                    }
+                                }
+                            }
+                            .addOnFailureListener {
+                                showToast("Không thể lấy thông tin người dùng")
+                            }
                     } else {
-                        Toast.makeText(this, "Đăng nhập thất bại: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        showToast("Đăng nhập thất bại: ${task.exception?.message}")
                     }
                 }
         } else {
@@ -72,25 +100,44 @@ class LoginActivity : AppCompatActivity() {
                     if (!querySnapshot.isEmpty) {
                         val userDoc = querySnapshot.documents[0]
                         val email = userDoc.getString("email")
-                        if (!email.isNullOrEmpty()) {
+                        val uid = userDoc.getString("id") ?: userDoc.id
+                        if (!email.isNullOrEmpty() && !uid.isNullOrEmpty()) {
                             auth.signInWithEmailAndPassword(email, password)
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
-                                        startActivity(Intent(this, MainActivity::class.java))
-                                        finish()
+                                        db.collection("users").document(uid).get()
+                                            .addOnSuccessListener { doc ->
+                                                if (!isFinishing && !isDestroyed) {
+                                                    if (doc != null && doc.exists()) {
+                                                        val role = doc.getString("role") ?: "user"
+                                                        if (role == "admin") {
+                                                            startActivity(Intent(this,
+                                                                AdminMainActivity::class.java))
+                                                        } else {
+                                                            startActivity(Intent(this, MainActivity::class.java))
+                                                        }
+                                                        finish()
+                                                    } else {
+                                                        showToast("Không tìm thấy thông tin tài khoản trong hệ thống!")
+                                                    }
+                                                }
+                                            }
+                                            .addOnFailureListener {
+                                                showToast("Không thể lấy thông tin người dùng")
+                                            }
                                     } else {
-                                        Toast.makeText(this, "Đăng nhập thất bại: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                                        showToast("Đăng nhập thất bại: ${task.exception?.message}")
                                     }
                                 }
                         } else {
-                            Toast.makeText(this, "Không tìm thấy email ứng với số điện thoại này", Toast.LENGTH_SHORT).show()
+                            showToast("Không tìm thấy email hoặc UID ứng với số điện thoại này")
                         }
                     } else {
-                        Toast.makeText(this, "Số điện thoại không tồn tại!", Toast.LENGTH_SHORT).show()
+                        showToast("Số điện thoại không tồn tại!")
                     }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Lỗi: ${e.message}", Toast.LENGTH_SHORT).show()
+                    showToast("Lỗi: ${e.message}")
                 }
         }
     }

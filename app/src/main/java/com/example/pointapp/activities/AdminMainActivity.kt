@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.pointapp.R
 import com.example.pointapp.databinding.ActivityAdminMainBinding
+import com.example.pointapp.fragments.AdminOrderFragment
 import com.example.pointapp.fragments.AdminRewardFragment
 import com.example.pointapp.fragments.AdminStoreFragment
 import com.example.pointapp.fragments.AdminUserFragment
@@ -19,14 +20,16 @@ class AdminMainActivity : AppCompatActivity() {
         binding = ActivityAdminMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val adminOrderFragment = AdminOrderFragment()
         val adminUserFragment = AdminUserFragment()
         val adminStoreFragment = AdminStoreFragment()
         val adminRewardFragment = AdminRewardFragment()
 
-        makeCurrentFragment(adminUserFragment)
+        makeCurrentFragment(adminOrderFragment)
 
         binding.bottomNavBarAdmin.setOnNavigationItemSelectedListener {
             when(it.itemId){
+                R.id.createOrder -> makeCurrentFragment(adminOrderFragment)
                 R.id.member -> makeCurrentFragment(adminUserFragment)
                 R.id.store -> makeCurrentFragment(adminStoreFragment)
                 R.id.reward -> makeCurrentFragment(adminRewardFragment)

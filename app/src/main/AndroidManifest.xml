@@ -17,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PointApp">
         <activity
+            android:name=".activities.AdminScanQRCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AdminViewOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AdminCreateOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.AdminMainActivity"
             android:exported="false" />
         <activity

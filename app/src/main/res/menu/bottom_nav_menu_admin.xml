@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/createOrder"
+        android:icon="@drawable/ic_order"
+        android:title="Tạo hoá đơn"/>
+    <item
         android:id="@+id/member"
         android:icon="@drawable/ic_member"
         android:title="Thành viên"/>

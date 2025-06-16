@@ -98,7 +98,6 @@ class CompleteProfileActivity : AppCompatActivity() {
             val year = edtYear.text.toString().toIntOrNull() ?: 0
             val otp = edtOtp.text.toString().trim()
             val verId = verificationId
-            val role = role
 
             val errorMsg = validateProfile(
                 firstName, lastName, email, phone, day, month, year, city, gender, otp, verId
@@ -112,7 +111,7 @@ class CompleteProfileActivity : AppCompatActivity() {
             // Liên kết hoặc cập nhật số điện thoại với Firebase Auth
             auth.currentUser?.linkWithCredential(credential)
                 ?.addOnSuccessListener {
-                    saveUser(firstName, lastName, email, phone, day, month, year, city, gender, role)
+                    saveUser(firstName, lastName, email, phone, day, month, year, city, gender)
                 }
                 ?.addOnFailureListener { e ->
                     if (e is FirebaseAuthUserCollisionException ||
@@ -129,8 +128,7 @@ class CompleteProfileActivity : AppCompatActivity() {
                                     month,
                                     year,
                                     city,
-                                    gender,
-                                    role
+                                    gender
                                 )
                             }
                             ?.addOnFailureListener { err ->
@@ -152,8 +150,7 @@ class CompleteProfileActivity : AppCompatActivity() {
         month: Int,
         year: Int,
         city: String,
-        gender: String,
-        role: String
+        gender: String
     ) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val user = User(
