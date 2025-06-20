@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:gravity="center_vertical"
+    android:background="#FFF"
+    android:layout_marginBottom="8dp">
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/product_sample"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="10dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Marble Coffee"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvProductDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bạc xỉu"
+            android:textColor="#888"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="52.000đ"
+            android:textSize="16sp"
+            android:textColor="#E53935"
+            android:textStyle="bold"/>
+
+        <ImageButton
+            android:id="@+id/btnAddToCart"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_add"
+            android:background="@color/galaxy"
+            android:contentDescription="Thêm vào giỏ"/>
+    </LinearLayout>
+</LinearLayout>
