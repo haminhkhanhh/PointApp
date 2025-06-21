@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="8dp"
+    android:background="#FFF"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:text="Nguyễn Văn A"
+        android:textColor="#444"/>
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:text="0123456789"
+        android:textColor="#444"/>
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:text="a@gmail.com"
+        android:textColor="#444"/>
+
+    <!-- Nút xem -->
+    <ImageView
+        android:id="@+id/btnView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_view"
+        android:background="#F44336"
+        android:contentDescription="Xem"
+        android:padding="8dp"/>
+
+    <!-- Nút chỉnh sửa -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnEdit"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_edit_24"
+        android:background="@color/light_gray"
+        android:contentDescription="Sửa"
+        android:padding="8dp"/>
+</LinearLayout>
