@@ -1,5 +1,6 @@
 package com.example.pointapp.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
@@ -14,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 //import java.util.logging.Handler
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
