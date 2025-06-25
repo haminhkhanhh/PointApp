@@ -13,21 +13,14 @@ import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.ui.layout.FirstBaseline
 import com.example.pointapp.R
 import com.example.pointapp.activities.ProfileActivity
+import com.example.pointapp.activities.RewardsActivity
 import com.example.pointapp.model.Point
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     private lateinit var tvGreeting: TextView
@@ -65,8 +58,8 @@ class HomeFragment : Fragment() {
                     val lastName = docUser.getString("lastName") ?: ""
                     tvCustomerName.text = "$firstName $lastName"
 
-                    // 2. Lấy point từ collection 'point' (root)
-                    db.collection("point").document(uid)
+                    // 2. Lấy point từ collection 'user' (root)
+                    db.collection("users").document(uid)
                         .get()
                         .addOnSuccessListener { docPoint ->
                             val pointObj = docPoint.toObject(Point::class.java)
@@ -92,18 +85,23 @@ class HomeFragment : Fragment() {
 
         // Bắt sự kiện các nút (ví dụ)
         view.findViewById<LinearLayout>(R.id.imgProfile).setOnClickListener {
-            Toast.makeText(context, "Profile clicked!", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), ProfileActivity::class.java)
             startActivity(intent)
         }
         view.findViewById<LinearLayout>(R.id.imgInbox).setOnClickListener {
-            Toast.makeText(context, "Inbox clicked!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Chức năng đang phát triển!", Toast.LENGTH_SHORT).show()
         }
         view.findViewById<ImageView>(R.id.imgSettings).setOnClickListener {
-            Toast.makeText(context, "Settings clicked!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Chức năng đang phát triển!", Toast.LENGTH_SHORT).show()
         }
         view.findViewById<Button>(R.id.btnDetails).setOnClickListener {
-            Toast.makeText(context, "Details clicked!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, RewardsActivity::class.java)
+            FirebaseFirestore.getInstance().collection("users")
+                .document(uid.toString()).get().addOnSuccessListener { docUser ->
+                    val currentUserPhone = docUser.getString("phone") ?: ""
+                    intent.putExtra("customerPhone", currentUserPhone)
+                    startActivity(intent)
+                }
         }
         view.findViewById<Button>(R.id.btnBenefits).setOnClickListener {
             Toast.makeText(context, "Benefits clicked!", Toast.LENGTH_SHORT).show()

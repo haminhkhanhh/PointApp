@@ -32,12 +32,12 @@ class ProductAdapter(
 
     inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(product: Product) {
-            itemView.findViewById<TextView>(R.id.tvProductName).text = product.name
-            itemView.findViewById<TextView>(R.id.tvProductDesc).text = product.desc
-            itemView.findViewById<TextView>(R.id.tvProductPrice).text = "${product.price.toInt()}đ"
+            itemView.findViewById<TextView>(R.id.txtProductName).text = product.name
+            itemView.findViewById<TextView>(R.id.txtProductDesc).text = product.desc
+            itemView.findViewById<TextView>(R.id.txtProductPrice).text = "${product.price.toInt()}đ"
             // Load ảnh nếu có (sử dụng Glide/Picasso):
             // Glide.with(itemView).load(product.imageUrl).into(itemView.findViewById(R.id.imgProduct))
-            itemView.findViewById<ImageButton>(R.id.btnAddToCart).setOnClickListener {
+            itemView.findViewById<ImageButton>(R.id.btnAdd).setOnClickListener {
                 onAddToCart(product)
             }
         }

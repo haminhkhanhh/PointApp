@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Chọn mức Đường"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+            android:id="@+id/rgSugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton android:id="@+id/rbSugar100" android:text="100%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            <RadioButton android:id="@+id/rbSugar70" android:text="70%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            <RadioButton android:id="@+id/rbSugar50" android:text="50%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            <RadioButton android:id="@+id/rbSugar30" android:text="30%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            <RadioButton android:id="@+id/rbSugar0"  android:text="0%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        </RadioGroup>
+
+        <View android:layout_width="match_parent" android:layout_height="12dp"/>
+
+        <TextView
+            android:text="Chọn mức Đá"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+            android:id="@+id/rgIce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton android:id="@+id/rbIce100" android:text="100%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            <RadioButton android:id="@+id/rbIce70"  android:text="70%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            <RadioButton android:id="@+id/rbIce50"  android:text="50%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            <RadioButton android:id="@+id/rbIce30"  android:text="30%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+            <RadioButton android:id="@+id/rbIce0"   android:text="0%" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        </RadioGroup>
+
+        <View android:layout_width="match_parent" android:layout_height="12dp"/>
+
+        <TextView
+            android:text="Chọn Topping"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTopping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="80dp"/>
+
+
+        <View android:layout_width="match_parent" android:layout_height="16dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xác nhận"
+            android:background="@drawable/bg_button_white"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="16dp">
+
+        <TextView
+            android:text="Chi tiết hóa đơn"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- ID hóa đơn -->
+        <TextView
+            android:id="@+id/tvBillId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID: 123456"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <!-- Thời gian -->
+        <TextView
+            android:id="@+id/tvBillTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thời gian: 24/06/2025 20:24" />
+
+        <!-- Số điện thoại khách -->
+        <TextView
+            android:id="@+id/tvBillPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SĐT: +84901234567" />
+
+        <!-- Họ tên khách -->
+        <TextView
+            android:id="@+id/tvBillCustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên: Nguyễn Văn A" />
+
+        <!-- Voucher -->
+        <TextView
+            android:id="@+id/tvBillVoucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voucher: SUMMER20" />
+
+        <!-- Danh sách món order -->
+        <TextView
+            android:text="Danh sách món:"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOrderItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Tổng tiền trước giảm -->
+        <TextView
+            android:id="@+id/tvBillTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng tiền: 120.000đ"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <!-- Giá sau giảm -->
+        <TextView
+            android:id="@+id/tvBillFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thành tiền: 100.000đ"
+            android:textStyle="bold"
+            android:textColor="#008000"
+            android:textSize="18sp" />
+    </LinearLayout>
+</ScrollView>

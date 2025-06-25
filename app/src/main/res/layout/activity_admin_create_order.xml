@@ -1,6 +1,6 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -15,9 +15,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title=""
-            app:navigationIcon="@drawable/ic_close"/>
-
+            app:navigationIcon="@drawable/ic_close"
+            app:title="" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -36,7 +35,7 @@
                 android:id="@+id/tvStoreName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="KH Coffee - "
+                android:text="KH Coffee - Nguyễn Hồng Đào"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -60,23 +59,28 @@
             android:layout_height="wrap_content"
             android:queryHint="Tìm món..."/>
 
-        <!-- TabLayout danh mục -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayoutCategory"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabMode="scrollable"
-            app:tabIndicatorColor="@color/galaxy"
-            app:tabSelectedTextColor="@color/galaxy"
-            app:tabTextColor="@android:color/black"/>
+            android:layout_height="match_parent">
 
-        <!-- RecyclerView danh sách món -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProductList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:clipToPadding="false"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProductSections"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Cart"
+        android:src="@drawable/ic_cart"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:visibility="visible"
+        android:backgroundTint="@color/galaxy"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

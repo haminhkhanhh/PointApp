@@ -1,6 +1,6 @@
 pluginManagement {
     repositories {
-        google ()
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "PointApp"
 include(":app")
- 

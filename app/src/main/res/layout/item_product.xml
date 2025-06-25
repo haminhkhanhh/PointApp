@@ -1,66 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:padding="8dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:gravity="center_vertical"
-    android:background="#FFF"
-    android:layout_marginBottom="8dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgProduct"
+        android:src="@drawable/product_sample"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@drawable/product_sample"
-        android:scaleType="centerCrop"
-        android:layout_marginEnd="10dp"/>
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:orientation="vertical"
+        android:layout_marginStart="12dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/tvProductName"
+            android:id="@+id/txtProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Marble Coffee"
+            android:text="Product name"
             android:textStyle="bold"
-            android:textSize="15sp"/>
+            android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/tvProductDesc"
+            android:id="@+id/txtProductDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bạc xỉu"
-            android:textColor="#888"
-            android:textSize="13sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center">
+            android:text="Product desc"
+            android:textColor="#666"
+            android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tvProductPrice"
+            android:id="@+id/txtProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="52.000đ"
-            android:textSize="16sp"
-            android:textColor="#E53935"
-            android:textStyle="bold"/>
-
-        <ImageButton
-            android:id="@+id/btnAddToCart"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_add"
-            android:background="@color/galaxy"
-            android:contentDescription="Thêm vào giỏ"/>
+            android:textStyle="bold"
+            android:text="50000"
+            android:textColor="#FF0000"
+            android:textSize="20sp"/>
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAdd"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:text="+"
+        android:textColor="@color/white"
+        android:backgroundTint="#FF5722"
+        android:background="@drawable/bg_button_white"
+        android:textSize="20sp"/>
 </LinearLayout>

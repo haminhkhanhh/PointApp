@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -66,7 +67,12 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.zxing)
     implementation(libs.core)
+    implementation(libs.glide)
+    implementation(libs.androidx.room.compiler)
 
+    configurations.all {
+        exclude(group = "com.intellij", module = "annotations")
+    }
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

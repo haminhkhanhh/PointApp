@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBillId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID: 123456"
+            android:textStyle="bold"
+            android:textColor="#333"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tvBillTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="24/06/2025 20:24"
+            android:textSize="14sp"
+            android:textColor="#888" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvBillTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="end|center_vertical"
+        android:text="120.000đ"
+        android:textStyle="bold"
+        android:textColor="#008000"
+        android:textSize="16sp" />
+</LinearLayout>

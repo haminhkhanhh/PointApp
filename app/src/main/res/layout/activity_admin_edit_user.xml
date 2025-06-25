@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Close button (nếu muốn, bạn có thể dùng Toolbar ở ngoài cùng) -->
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_close"
+            android:layout_gravity="start"
+            android:contentDescription="Close"
+            android:padding="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chỉnh sửa thông tin người dùng - ADMIN"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Member Name -->
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Tên thành viên" android:textStyle="bold"
+            android:textSize="18sp" android:layout_marginTop="4dp"/>
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Họ" android:textColor="#888"/>
+        <EditText
+            android:id="@+id/edtFirstName"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#bbb"/>
+
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Tên" android:textColor="#888" android:layout_marginTop="12dp"/>
+        <EditText
+            android:id="@+id/edtLastName"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#bbb"/>
+
+        <!-- Birthday -->
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Ngày sinh" android:textStyle="bold"
+            android:textSize="18sp" android:layout_marginTop="24dp"/>
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Chúng tôi không bao giờ muốn bỏ lỡ một ngày đặc biệt như vậy. Ngày sinh của bạn không thể thay đổi sau khi gử"
+            android:textColor="#888" android:textSize="14sp"
+            android:layout_marginBottom="4dp"/>
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:text="Ngày" android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/edtDay"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:inputType="number" android:maxLength="2"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:orientation="vertical"
+                android:layout_marginStart="24dp">
+                <TextView android:text="Tháng" android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/edtMonth"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:inputType="number" android:maxLength="2"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#bbb" android:layout_marginTop="8dp"/>
+
+        <!-- Contact Information -->
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Thông tin liên hệ" android:textStyle="bold"
+            android:textSize="18sp" android:layout_marginTop="24dp"/>
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Số điện thoại" android:textColor="#888"/>
+        <EditText
+            android:id="@+id/edtPhone"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:inputType="phone"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#bbb"/>
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Email" android:textColor="#888" android:layout_marginTop="12dp"/>
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#bbb"/>
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Thành phố" android:textColor="#888" android:layout_marginTop="12dp"/>
+        <EditText
+            android:id="@+id/edtCity"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#bbb"/>
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Giới tính" android:textColor="#888" android:layout_marginTop="12dp"/>
+        <Spinner
+            android:id="@+id/spGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#bbb"/>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#bbb"/>
+
+        <!-- Nút Update -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnUpdate"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:text="UPDATE"
+            android:background="@drawable/bg_button_white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_marginTop="32dp"/>
+    </LinearLayout>
+</ScrollView>

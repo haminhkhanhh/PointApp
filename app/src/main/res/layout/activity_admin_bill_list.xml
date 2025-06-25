@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:title="Danh sách hóa đơn" />
+
+    <!-- RecyclerView cho danh sách bill -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBills"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!-- FrameLayout cho fragment chi tiết, ban đầu GONE -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+</LinearLayout>

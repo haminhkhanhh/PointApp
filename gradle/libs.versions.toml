@@ -2,7 +2,8 @@
 agp = "8.10.1"
 firebaseAuthVersion = "22.3.0"
 firebaseDatabase = "21.0.0"
-googlePlayServicesMaps = "18.2.0"
+glide = "4.16.0"
+googlePlayServicesMaps = "19.2.0"
 journeyappsZxingAndroidEmbedded = "4.3.0"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
@@ -11,10 +12,10 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.0"
 activityCompose = "1.10.1"
-composeBom = "2025.05.01"
+composeBom = "2025.06.01"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.2.1"
-appcompat = "1.7.0"
+appcompat = "1.7.1"
 firebaseFirestoreKtx = "25.1.4"
 firebaseMessagingKtx = "24.1.1"
 material = "1.12.0"
@@ -24,11 +25,13 @@ materialVersion = "1.11.0"
 playServicesLocation = "21.3.0"
 playServicesMaps = "19.2.0"
 core = "1.49.0"
+roomCompiler = "2.7.2"
 
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 gms-play-services-maps-v1820 = { module = "com.google.android.gms:play-services-maps", version.ref = "googlePlayServicesMaps" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
@@ -60,6 +63,7 @@ firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.
 firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 material-v1110 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 core = { group = "com.google.ar", name = "core", version.ref = "core" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 
 
 [plugins]
@@ -68,5 +72,6 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 #google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 google_gms_google_services = { id = "com.google.gms.google-services", version = "4.4.2" }
+kotlin-parcelize = { id = "kotlin-parcelize" }
 
 

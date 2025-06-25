@@ -1,90 +1,188 @@
 package com.example.pointapp.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pointapp.R
-import com.example.pointapp.adapters.ProductAdapter
+import com.example.pointapp.adapters.SectionedProductAdapter
+import com.example.pointapp.fragments.CustomizeDrinkBottomSheet
+import com.example.pointapp.model.Category
+import com.example.pointapp.model.OrderItem
 import com.example.pointapp.model.Product
-import com.google.android.material.tabs.TabLayout
+import com.example.pointapp.model.Topping
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.Normalizer
+import java.util.regex.Pattern
 
 class AdminCreateOrderActivity : AppCompatActivity() {
-    private lateinit var adapter: ProductAdapter
-    private val categoryList = mutableListOf<Pair<String, String>>() // Pair<categoryId, categoryName>
+
+    private lateinit var adapter: SectionedProductAdapter
+    private lateinit var rvProductSections: RecyclerView
+    private lateinit var searchView: SearchView
+
+    private var categoryList: List<Category> = emptyList()
+    private var productList: List<Product> = emptyList()
+    private val cartList = mutableListOf<OrderItem>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_create_order)
 
-        // Nếu bạn dùng ViewCompat để căn lề:
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        rvProductSections = findViewById(R.id.rvProductSections)
+        searchView = findViewById(R.id.searchView)
+        rvProductSections.layoutManager = LinearLayoutManager(this)
+
+        loadCategoriesAndProducts {
+            setupAdapter()
+            setupSearchView()
         }
 
-        // Adapter setup
-        adapter = ProductAdapter(listOf()) { product ->
-            Toast.makeText(this, "Đã thêm: ${product.name}", Toast.LENGTH_SHORT).show()
+        findViewById<FloatingActionButton>(R.id.fabCart).setOnClickListener {
+            // Gửi cartList sang màn hình thanh toán
+            val intent = Intent(this, CheckoutActivity::class.java)
+            intent.putParcelableArrayListExtra("cartList", ArrayList(cartList))
+            startActivity(intent)
         }
-        val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvProductList)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Load category lên TabLayout
-        loadCategories()
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
 
-        // SearchView filter
-        val searchView = findViewById<SearchView>(R.id.searchView)
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?) = false
+    }
+
+
+    private fun loadCategoriesAndProducts(onLoaded: () -> Unit) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("categories")
+            .orderBy("order")
+            .get()
+            .addOnSuccessListener { categorySnapshot ->
+                categoryList = categorySnapshot.map { doc ->
+                    Category(
+                        id = doc.id,
+                        name = doc.getString("name") ?: "",
+                        order = (doc.getLong("order") ?: 0).toInt()
+                    )
+                }
+                db.collection("products")
+                    .get()
+                    .addOnSuccessListener { productSnapshot ->
+                        productList = productSnapshot.map { doc ->
+                            Product(
+                                id = doc.id,
+                                name = doc.getString("name") ?: "",
+                                desc = doc.getString("desc") ?: "",
+                                price = doc.getDouble("price") ?: 0.0,
+                                imageUrl = doc.getString("imageUrl") ?: "",
+                                categoryId = doc.getString("categoryId") ?: ""
+                            )
+                        }
+                        onLoaded()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Lỗi lấy sản phẩm: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Lỗi lấy danh mục: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    // Gọi setupAdapter sau mỗi lần load/filter
+    private fun setupAdapter(filteredProducts: List<Product>? = null) {
+        val products = filteredProducts ?: productList
+        adapter = SectionedProductAdapter(
+            categories = categoryList,
+            products = products
+        ) { product ->
+            // Khi click nút +, mở BottomSheet chọn đường/đá/topping cho product này
+            showCustomizeDrinkBottomSheet(product)
+        }
+        rvProductSections.adapter = adapter
+    }
+
+    // Tìm kiếm không dấu
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                filterProductList(query)
+                return true
+            }
+
             override fun onQueryTextChange(newText: String?): Boolean {
-                adapter.filter.filter(newText)
+                filterProductList(newText)
                 return true
             }
         })
     }
 
-    private fun loadCategories() {
-        FirebaseFirestore.getInstance().collection("categories")
-            .orderBy("order")
-            .get().addOnSuccessListener { snapshot ->
-                val tabLayout = findViewById<TabLayout>(R.id.tabLayoutCategory)
-                tabLayout.removeAllTabs()
-                categoryList.clear()
-                snapshot.forEach { doc ->
-                    val categoryId = doc.id
-                    val categoryName = doc.getString("name") ?: ""
-                    categoryList.add(Pair(categoryId, categoryName))
-                    tabLayout.addTab(tabLayout.newTab().setText(categoryName))
-                }
-                // Load sản phẩm cho tab đầu tiên (nếu có)
-                if (categoryList.isNotEmpty()) {
-                    loadProductsByCategory(categoryList[0].first)
-                }
-                tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-                    override fun onTabSelected(tab: TabLayout.Tab?) {
-                        val idx = tab?.position ?: 0
-                        loadProductsByCategory(categoryList[idx].first)
-                    }
-                    override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                    override fun onTabReselected(tab: TabLayout.Tab?) {}
-                })
-            }
+    private fun filterProductList(query: String?) {
+        val lowerQuery = query?.trim()?.lowercase()?.removeVietnameseAccents() ?: ""
+        if (lowerQuery.isEmpty()) {
+            setupAdapter()
+            return
+        }
+        val filteredProducts = productList.filter {
+            val nameNoAccent = it.name.lowercase().removeVietnameseAccents()
+            val descNoAccent = it.desc.lowercase().removeVietnameseAccents()
+            nameNoAccent.contains(lowerQuery) || descNoAccent.contains(lowerQuery)
+        }
+        setupAdapter(filteredProducts)
     }
 
-    private fun loadProductsByCategory(categoryId: String) {
-        FirebaseFirestore.getInstance().collection("products")
-            .whereEqualTo("categoryId", categoryId)
-            .get().addOnSuccessListener { snap ->
-                val list = snap.documents.mapNotNull { it.toObject(Product::class.java)?.copy(id = it.id) }
-                adapter.updateList(list)
+    // Extension: bỏ dấu tiếng Việt
+    private fun String.removeVietnameseAccents(): String {
+        var temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+        val pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+")
+        temp = pattern.matcher(temp).replaceAll("")
+        temp = temp.replace('đ', 'd').replace('Đ', 'D')
+        return temp
+    }
+
+    // Hiển thị BottomSheet chọn đường/đá/topping (topping lấy từ Firestore)
+    private fun showCustomizeDrinkBottomSheet(product: Product) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("toppings")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val toppingList = snapshot.map { doc ->
+                    Topping(
+                        id = doc.id,
+                        name = doc.getString("name") ?: "",
+                        price = (doc.getLong("price") ?: 0).toInt()
+                    )
+                }
+                val bottomSheet = CustomizeDrinkBottomSheet(toppingList) { sugar, ice, selectedToppings ->
+                    // Xử lý khi xác nhận
+                    val msg = "Món: ${product.name}\nĐường: $sugar, Đá: $ice\nTopping: ${
+                        selectedToppings.joinToString { "${it.name} (+${it.price}đ)" }
+                    }"
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                    cartList.add(OrderItem(product, sugar, ice, selectedToppings))
+                    findViewById<FloatingActionButton>(R.id.fabCart).show()
+                    Toast.makeText(this, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show()
+                }
+                bottomSheet.show(supportFragmentManager, "customizeDrink")
             }
     }
+}
+
+// Hàm remove dấu tiếng Việt (nên để cuối file, hoặc move vào file Utils riêng)
+fun String.removeVietnameseAccents(): String {
+    var temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+    val pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+")
+    temp = pattern.matcher(temp).replaceAll("")
+    temp = temp.replace('đ', 'd').replace('Đ', 'D')
+    return temp
 }

@@ -17,6 +17,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PointApp">
         <activity
+            android:name=".activities.BillHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PointHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AdminEditStoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AdminEditUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AdminBillListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CheckoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.AdminScanQRCodeActivity"
             android:exported="false" />
         <activity
